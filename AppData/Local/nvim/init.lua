@@ -59,6 +59,10 @@ bo.expandtab = false -- ugh, tabs :(
 
 g.mapleader = ' '
 
+vimp.nnoremap('<A-o>', function()
+		cmd('e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,')
+end)
+
 vimp.nnoremap('<C-p>', function()
 		api.nvim_call_function('fzf#vim#files', {fn.getcwd()})
 end)

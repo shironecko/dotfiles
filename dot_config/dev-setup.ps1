@@ -36,8 +36,11 @@ cargo install --locked pueue
 cargo install hx
 # Renaming stuff
 cargo install nomino
-# tmux in rust
-cargo install zellij
+# tmux in rust (apparently no Win support, like every other multiplexer ); )
+#cargo install zellij
 
 # My font of choice
 scoop install IBMPlexMono-NF
+
+# make fzf use fd instead of find
+[Environment]::SetEnvironmentVariable("FZF_DEFAULT_COMMAND", "fd --type f", "User")
