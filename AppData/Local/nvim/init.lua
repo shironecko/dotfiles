@@ -1,5 +1,4 @@
 local fn = vim.fn
-
 local install_path = fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -14,9 +13,20 @@ require "paq" {
     "tpope/vim-commentary";
     "tpope/vim-surround";
     "tpope/vim-repeat";
+
+	--"ibhagwan/fzf-lua";
+	--"vijaymarupudi/nvim-fzf";
+	"kyazdani42/nvim-web-devicons";
+
+	{'junegunn/fzf', run = 'fzf#install()' },
+	'junegunn/fzf.vim',
+
+	"svermeulen/vimpeccable"
 }
 
 local cmd = vim.cmd
+local api = vim.api
+local vimp = require('vimp')
 local o = vim.o  -- global
 local g = vim.g  -- global 2?
 local wo = vim.wo -- window local
@@ -50,3 +60,12 @@ wo.foldenable = true
 bo.expandtab = false -- ugh, tabs :(
 
 g.mapleader = ' '
+
+vimp.nnoremap('<C-p>', function()
+		api.nvim_call_function('fzf#vim#files', {fn.getcwd()})
+end)
+
+vimp.nnoremap('<leader>b', function()
+		api.nvim_call_function('fzf#vim#buffers', {})
+end)
+
