@@ -14,8 +14,6 @@ require "paq" {
     "tpope/vim-surround";
     "tpope/vim-repeat";
 
-	--"ibhagwan/fzf-lua";
-	--"vijaymarupudi/nvim-fzf";
 	"kyazdani42/nvim-web-devicons";
 
 	{'junegunn/fzf', run = 'fzf#install()' },
