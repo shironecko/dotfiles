@@ -46,7 +46,6 @@ o.wildmenu = true
 o.showmatch = true
 o.expandtab = false -- at some point I switch to a project that uses spaces instead of tabs...
 o.ruler = true
-o.clipboard = 'unnamedplus'
 o.tabstop = 4
 -- window-local option
 wo.number = true
