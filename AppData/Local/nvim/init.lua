@@ -7,13 +7,21 @@ end
 require('packer').startup(function(use)
     use "wbthomason/packer.nvim"
 
+    use "tweekmonster/startuptime.vim"
+    use "svermeulen/vimpeccable"
+
     use "chriskempson/base16-vim"
+    use "kyazdani42/nvim-web-devicons"
+    use "nvim-lualine/lualine.nvim"
 
     use "tpope/vim-commentary"
     use "tpope/vim-surround"
     use "tpope/vim-repeat"
 
-    use "kyazdani42/nvim-web-devicons"
+    use {
+        "luukvbaal/stabilize.nvim",
+        config = function() require("stabilize").setup() end
+    }
 
     use {
         'nvim-telescope/telescope.nvim',
@@ -22,12 +30,6 @@ require('packer').startup(function(use)
         }
     }
 
-    use "nvim-lualine/lualine.nvim"
-
-    use "svermeulen/vimpeccable"
-
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
   if packer_bootstrap then
     require('packer').sync()
   end

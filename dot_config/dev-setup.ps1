@@ -27,6 +27,8 @@ scoop install vscode sublime-text sublime-merge neovim
 scoop install watchexec
 scoop install rustup
 scoop install alacritty
+# Benchmarking console apps
+scoop install hyperfine
 scoop install autohotkey
 # Regex's are hard
 scoop install grex
