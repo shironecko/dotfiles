@@ -26,12 +26,7 @@ require('packer').startup(function(use)
   use 'tpope/vim-surround'
   use 'tpope/vim-repeat'
 
-  use {
-    'luukvbaal/stabilize.nvim',
-    config = function()
-      require('stabilize').setup()
-    end,
-  }
+  use 'luukvbaal/stabilize.nvim'
 
   use {
     'nvim-telescope/telescope.nvim',
@@ -120,6 +115,8 @@ local lspconfig = require 'lspconfig'
 local luasnip = require 'luasnip'
 local lspkind = require 'lspkind'
 lspkind.init()
+
+require('stabilize').setup()
 
 require('lualine').setup {
   sections = {
