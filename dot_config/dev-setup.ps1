@@ -25,7 +25,8 @@ scoop bucket add jetbrains
 scoop install 7zip bat fd ripgrep fzf tokei touch lsd
 scoop install vscode sublime-text sublime-merge neovim
 scoop install watchexec
-scoop install rustup
+scoop install rustup rust-analyzer
+scoop install llvm
 scoop install alacritty
 # Benchmarking console apps
 scoop install hyperfine
@@ -39,6 +40,8 @@ cargo install --locked pueue
 cargo install hx
 # Renaming stuff
 cargo install nomino
+# Lua autoformatter
+cargo install stylua
 # tmux in rust (apparently no Win support, like every other multiplexer ); )
 #cargo install zellij
 
