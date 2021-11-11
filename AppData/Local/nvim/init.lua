@@ -291,9 +291,10 @@ for _, lsp in ipairs(servers) do
 end
 
 -- TODO: maybe re-enable this once gutter stops jerking?
--- local signs = { Error = ' ', Warning = ' ', Hint = ' ', Information = ' ' }
--- for type, icon in pairs(signs) do
---   -- local hl = "DiagnosticSign" .. type -- For 0.6.0
---   local hl = 'LspDiagnosticsSign' .. type -- For 0.5.1
---   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
--- end
+local signs = { Error = ' ', Warning = ' ', Hint = ' ', Information = ' ' }
+cmd 'set signcolumn=yes'
+for type, icon in pairs(signs) do
+  -- local hl = "DiagnosticSign" .. type -- For 0.6.0
+  local hl = 'LspDiagnosticsSign' .. type -- For 0.5.1
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
+end
