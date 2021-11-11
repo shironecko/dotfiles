@@ -19,7 +19,7 @@ require('packer').startup(function(use)
   use 'EdenEast/nightfox.nvim'
   use 'kyazdani42/nvim-web-devicons'
   use 'nvim-lualine/lualine.nvim'
-  use 'arkav/lualine-lsp-progress'
+  use 'nvim-lua/lsp-status.nvim'
   use 'lukas-reineke/indent-blankline.nvim'
 
   use 'tpope/vim-commentary'
@@ -129,7 +129,7 @@ require('lualine').setup {
   },
   sections = {
     lualine_b = { 'diagnostics', sources = { 'nvim_lsp' } },
-    lualine_c = { 'filename', 'lsp_progress' },
+    lualine_c = { 'filename', require('lsp-status').status },
   },
 }
 
