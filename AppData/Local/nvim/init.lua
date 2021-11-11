@@ -270,6 +270,11 @@ local on_attach = function(client, bufnr)
     vimp.nnoremap(']d', vim.lsp.diagnostic.goto_next)
     vimp.nnoremap('<space>q', vim.lsp.diagnostic.set_loclist)
     vimp.nnoremap('<space>rF', vim.lsp.buf.formatting)
+
+    -- this one clangd shortcut
+    vimp.nnoremap({ 'silent' }, '<A-o>', function()
+      cmd 'ClangdSwitchSourceHeader'
+    end)
   end)
 end
 
@@ -285,9 +290,10 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-local signs = { Error = ' ', Warning = ' ', Hint = ' ', Information = ' ' }
-for type, icon in pairs(signs) do
-  -- local hl = "DiagnosticSign" .. type -- For 0.6.0
-  local hl = 'LspDiagnosticsSign' .. type -- For 0.5.1
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
-end
+-- TODO: maybe re-enable this once gutter stops jerking?
+-- local signs = { Error = ' ', Warning = ' ', Hint = ' ', Information = ' ' }
+-- for type, icon in pairs(signs) do
+--   -- local hl = "DiagnosticSign" .. type -- For 0.6.0
+--   local hl = 'LspDiagnosticsSign' .. type -- For 0.5.1
+--   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
+-- end
