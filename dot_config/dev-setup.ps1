@@ -48,10 +48,10 @@ cargo install stylua
 # My font of choice
 scoop install IBMPlexMono-NF
 
-# setup nvim plugins
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-
 # make fzf use fd instead of find
 [Environment]::SetEnvironmentVariable("FZF_DEFAULT_COMMAND", "fd --type f", "User")
 # enable fancy things in neovide
 [Environment]::SetEnvironmentVariable("NEOVIDE_MULTIGRID", "", "User")
+
+# setup nvim plugins
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
