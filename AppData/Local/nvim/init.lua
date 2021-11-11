@@ -14,13 +14,13 @@ end
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
-  use 'dstein64/vim-startuptime'
   use 'svermeulen/vimpeccable'
 
-  use 'chriskempson/base16-vim'
+  use 'EdenEast/nightfox.nvim'
   use 'kyazdani42/nvim-web-devicons'
   use 'nvim-lualine/lualine.nvim'
-  use 'glepnir/indent-guides.nvim'
+  use 'arkav/lualine-lsp-progress'
+  use 'lukas-reineke/indent-blankline.nvim'
 
   use 'tpope/vim-commentary'
   use 'tpope/vim-surround'
@@ -66,10 +66,12 @@ local bo = vim.bo -- buffer local
 
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 vim.opt.shortmess:append 'c'
+vim.opt.termguicolors = true
+o.termguicolors = true
+
+o.guifont = 'BlexMono NF:h16'
 
 o.inccommand = 'nosplit'
-o.termguicolors = true
-vim.opt.termguicolors = true
 o.swapfile = true
 o.smartcase = true
 o.laststatus = 2
@@ -105,7 +107,7 @@ if packer_bootstrap then
   return
 end
 
-cmd 'colorscheme base16-tomorrow-night'
+require('nightfox').load 'nightfox'
 
 local telescope = require 'telescope'
 local telescope_builtin = require 'telescope.builtin'
@@ -118,9 +120,16 @@ lspkind.init()
 
 require('stabilize').setup()
 
+-- this somehow fixes indent line background color?
+vim.cmd [[highlight IndentBlanklineSpaceChar guibg=#1a1a1a gui=nocombine]]
+
 require('lualine').setup {
+  options = {
+    theme = 'nightfox',
+  },
   sections = {
     lualine_b = { 'diagnostics', sources = { 'nvim_lsp' } },
+    lualine_c = { 'filename', 'lsp_progress' },
   },
 }
 

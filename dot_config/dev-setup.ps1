@@ -27,7 +27,7 @@ scoop install vscode sublime-text sublime-merge neovim
 scoop install watchexec
 scoop install rustup rust-analyzer
 scoop install llvm
-scoop install alacritty
+scoop install neovide, alacritty
 # Benchmarking console apps
 scoop install hyperfine
 scoop install autohotkey
@@ -53,3 +53,5 @@ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 # make fzf use fd instead of find
 [Environment]::SetEnvironmentVariable("FZF_DEFAULT_COMMAND", "fd --type f", "User")
+# enable fancy things in neovide
+[Environment]::SetEnvironmentVariable("NEOVIDE_MULTIGRID", "", "User")
