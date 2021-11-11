@@ -147,7 +147,7 @@ require('lualine').setup {
     theme = 'nightfox',
   },
   sections = {
-    lualine_b = { 'diagnostics', sources = { 'nvim_lsp' } },
+    lualine_b = { { 'diagnostics', sources = { 'nvim_lsp' } } },
     lualine_c = { 'filename', require('lsp-status').status },
   },
 }
