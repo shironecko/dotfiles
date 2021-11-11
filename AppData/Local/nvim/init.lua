@@ -102,26 +102,45 @@ filetype plugin indent on
 
 g.mapleader = ' '
 
--- next lines are plugin-specific and need packer to init first
-if packer_bootstrap then
+-- don't want config errors before packer install everything
+local function try_require(module, fn)
+  local success, result = pcall(require, module)
+  if success then
+    if fn then
+      fn(result)
+    end
+
+    return result
+  else
+    return nil
+  end
+end
+
+try_require('stabilize', function(mod)
+  mod.setup()
+end)
+
+try_require('nightfox', function(mod)
+  mod.load 'nightfox'
+end)
+
+local telescope_builtin = try_require 'telescope.builtin'
+local vimp = try_require 'vimp'
+local cmp = try_require 'cmp'
+local lspconfig = try_require 'lspconfig'
+local luasnip = try_require 'luasnip'
+local lspkind = try_require('lspkind', function(mod)
+  mod.init()
+end)
+local lsp_status = try_require 'lsp-status'
+
+if telescope_builtin == nil or vimp == nil or cmp == nil or lspconfig == nil or luasnip == nil or lspkind == nil or lsp_status == nil then
+  -- some interconnected setup follows, better not attempt it unless all plugins are installed
   return
 end
 
-require('nightfox').load 'nightfox'
-
-local telescope = require 'telescope'
-local telescope_builtin = require 'telescope.builtin'
-local vimp = require 'vimp'
-local cmp = require 'cmp'
-local lspconfig = require 'lspconfig'
-local luasnip = require 'luasnip'
-local lspkind = require 'lspkind'
-lspkind.init()
-
-require('stabilize').setup()
-
 -- this somehow fixes indent line background color?
-vim.cmd [[highlight IndentBlanklineSpaceChar guibg=#1a1a1a gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineSpaceChar guibg=#000000 gui=nocombine]]
 
 require('lualine').setup {
   options = {
@@ -135,8 +154,6 @@ require('lualine').setup {
 
 cmp.setup {
   mapping = {
-    --['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-    --['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
     ['<C-n>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
