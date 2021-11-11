@@ -51,7 +51,7 @@ scoop install IBMPlexMono-NF
 # make fzf use fd instead of find
 [Environment]::SetEnvironmentVariable("FZF_DEFAULT_COMMAND", "fd --type f", "User")
 # enable fancy things in neovide
-[Environment]::SetEnvironmentVariable("NEOVIDE_MULTIGRID", "", "User")
+[Environment]::SetEnvironmentVariable("NEOVIDE_MULTIGRID", "ON", "User")
 
 # setup nvim plugins
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
