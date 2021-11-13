@@ -32,6 +32,7 @@ require('packer').startup(function(use)
     'nvim-telescope/telescope.nvim',
     requires = {
       'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope-fzy-native.nvim',
     },
   }
 
@@ -124,6 +125,7 @@ try_require('nightfox', function(mod)
   mod.load 'nightfox'
 end)
 
+local telescope = try_require 'telescope'
 local telescope_builtin = try_require 'telescope.builtin'
 local vimp = try_require 'vimp'
 local cmp = try_require 'cmp'
@@ -134,7 +136,16 @@ local lspkind = try_require('lspkind', function(mod)
 end)
 local lsp_status = try_require 'lsp-status'
 
-if telescope_builtin == nil or vimp == nil or cmp == nil or lspconfig == nil or luasnip == nil or lspkind == nil or lsp_status == nil then
+if
+  telescope == nil
+  or telescope_builtin == nil
+  or vimp == nil
+  or cmp == nil
+  or lspconfig == nil
+  or luasnip == nil
+  or lspkind == nil
+  or lsp_status == nil
+then
   -- some interconnected setup follows, better not attempt it unless all plugins are installed
   return
 end
@@ -151,6 +162,14 @@ require('lualine').setup {
     lualine_c = { 'filename', require('lsp-status').status },
   },
 }
+
+telescope.setup {
+  defaults = {
+    path_display = { 'truncate' },
+  },
+}
+
+telescope.load_extension 'fzy_native'
 
 cmp.setup {
   mapping = {
