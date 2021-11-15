@@ -28,6 +28,8 @@ require('packer').startup(function(use)
 
   use 'luukvbaal/stabilize.nvim'
 
+  use 'editorconfig/editorconfig-vim'
+
   use {
     'nvim-telescope/telescope.nvim',
     requires = {
@@ -149,9 +151,6 @@ then
   -- some interconnected setup follows, better not attempt it unless all plugins are installed
   return
 end
-
--- this somehow fixes indent line background color?
-vim.cmd [[highlight IndentBlanklineSpaceChar guibg=#000000 gui=nocombine]]
 
 require('lualine').setup {
   options = {
