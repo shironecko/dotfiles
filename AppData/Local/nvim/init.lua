@@ -31,6 +31,11 @@ require('packer').startup(function(use)
   use 'editorconfig/editorconfig-vim'
 
   use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+  }
+
+  use {
     'nvim-telescope/telescope.nvim',
     requires = {
       'nvim-lua/plenary.nvim',
@@ -129,6 +134,23 @@ end)
 
 try_require('nightfox', function(mod)
   mod.load 'nightfox'
+end)
+
+try_require('nvim-treesitter.configs', function(mod)
+  mod.setup {
+    highlight = {
+      enable = true,
+      custom_captures = {
+        -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
+        ['foo.bar'] = 'Identifier',
+      },
+      -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+      -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+      -- Using this option may slow down your editor, and you may see some duplicate highlights.
+      -- Instead of true it can also be a list of languages
+      -- additional_vim_regex_highlighting = false,
+    },
+  }
 end)
 
 local telescope = try_require 'telescope'
@@ -253,24 +275,39 @@ cmp.setup {
   },
 }
 
-vimp.nnoremap('<A-o>', function()
-  cmd 'e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,'
-end)
-
 vimp.nnoremap('<leader>rf', function()
   cmd 'Neoformat'
 end)
 
+local project_ff_dir = './'
+try_require('plenary.context_manager', function(context_manager)
+  local with = context_manager.with
+  local open = context_manager.open
+  project_ff_dir = with(open '.project_ff_dir', function(reader)
+    return reader:read()
+  end)
+end)
+
 vimp.nnoremap('<C-f>', telescope_builtin.current_buffer_fuzzy_find)
-vimp.nnoremap('<leader>ff', telescope_builtin.find_files)
+
+vimp.nnoremap('<leader>ff', function()
+  telescope_builtin.find_files { search_dirs = { project_ff_dir } }
+end)
+vimp.nnoremap('<leader>fF', telescope_builtin.find_files)
+
+vimp.nnoremap('<leader>fg', function()
+  telescope_builtin.live_grep { search_dirs = { project_ff_dir } }
+end)
+vimp.nnoremap('<leader>fG', telescope_builtin.live_grep)
+
 vimp.nnoremap('<leader>fb', telescope_builtin.buffers)
-vimp.nnoremap('<leader>fg', telescope_builtin.live_grep)
 vimp.nnoremap('<leader>fh', telescope_builtin.search_history)
 vimp.nnoremap('<leader>fm', telescope_builtin.marks)
 vimp.nnoremap('<leader>fq', telescope_builtin.quickfix)
 vimp.nnoremap('<leader>fj', telescope_builtin.jumplist)
 vimp.nnoremap('<leader>fr', telescope_builtin.resume)
 vimp.nnoremap('<leader>fR', telescope_builtin.registers)
+vimp.nnoremap('<leader>ft', telescope_builtin.treesitter)
 
 local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -301,7 +338,7 @@ local on_attach = function(client, bufnr)
     vimp.nnoremap('<space>rF', vim.lsp.buf.formatting)
 
     -- this one clangd shortcut
-    vimp.nnoremap({ 'silent' }, '<A-o>', function()
+    vimp.nnoremap('<A-o>', function()
       cmd 'ClangdSwitchSourceHeader'
     end)
   end)
