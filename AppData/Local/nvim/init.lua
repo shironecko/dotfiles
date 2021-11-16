@@ -280,12 +280,25 @@ vimp.nnoremap('<leader>rf', function()
 end)
 
 local project_ff_dir = './'
+function file_exists(name)
+  local f = io.open(name, 'r')
+  if f ~= nil then
+    io.close(f)
+    return true
+  else
+    return false
+  end
+end
+
 try_require('plenary.context_manager', function(context_manager)
   local with = context_manager.with
   local open = context_manager.open
-  project_ff_dir = with(open '.project_ff_dir', function(reader)
-    return reader:read()
-  end)
+  local conf_path = '.project_ff_dir'
+  if file_exists(conf_path) then
+    project_ff_dir = with(open(conf_path), function(reader)
+      return reader:read()
+    end)
+  end
 end)
 
 vimp.nnoremap('<C-f>', telescope_builtin.current_buffer_fuzzy_find)
