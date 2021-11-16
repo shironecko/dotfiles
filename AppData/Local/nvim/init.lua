@@ -101,6 +101,10 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 filetype plugin indent on
+
+set hidden
+
+let neovide_remember_window_size = v:true
 ]]
 
 g.mapleader = ' '
@@ -261,6 +265,12 @@ vimp.nnoremap('<C-f>', telescope_builtin.current_buffer_fuzzy_find)
 vimp.nnoremap('<leader>ff', telescope_builtin.find_files)
 vimp.nnoremap('<leader>fb', telescope_builtin.buffers)
 vimp.nnoremap('<leader>fg', telescope_builtin.live_grep)
+vimp.nnoremap('<leader>fh', telescope_builtin.search_history)
+vimp.nnoremap('<leader>fm', telescope_builtin.marks)
+vimp.nnoremap('<leader>fq', telescope_builtin.quickfix)
+vimp.nnoremap('<leader>fj', telescope_builtin.jumplist)
+vimp.nnoremap('<leader>fr', telescope_builtin.resume)
+vimp.nnoremap('<leader>fR', telescope_builtin.registers)
 
 local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -272,6 +282,7 @@ local on_attach = function(client, bufnr)
     vimp.nnoremap('gd', telescope_builtin.lsp_definitions)
     vimp.nnoremap('gD', telescope_builtin.lsp_declarations)
     vimp.nnoremap('gi', telescope_builtin.lsp_implementations)
+    vimp.nnoremap('gt', telescope_builtin.lsp_type_definitions)
 
     -- raw lsp
     vimp.nnoremap('K', vim.lsp.buf.hover)
@@ -298,15 +309,33 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local servers = { 'clangd', 'rust_analyzer' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
+    capabilities = capabilities,
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
     },
   }
 end
+
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {
+  sources = {
+    { name = 'buffer' },
+  },
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  sources = cmp.config.sources({
+    { name = 'path' },
+  }, {
+    { name = 'cmdline' },
+  }),
+})
 
 -- TODO: maybe re-enable this once gutter stops jerking?
 local signs = { Error = ' ', Warning = ' ', Hint = ' ', Information = ' ' }
