@@ -94,7 +94,7 @@ o.showcmd = true
 o.wildmenu = true
 o.showmatch = true
 o.ruler = true
-o.list = true
+-- o.list = true
 -- window-local option
 wo.number = true
 wo.relativenumber = true
@@ -369,19 +369,25 @@ local on_attach = function(client, bufnr)
   end)
 end
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local servers = { 'clangd', 'rust_analyzer' }
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    },
-  }
-end
+lspconfig['rust_analyzer'].setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  flags = {
+    debounce_text_changes = 150,
+  },
+}
+
+lspconfig['clangd'].setup {
+  -- make NDK builds functional
+  cmd = { 'clangd', '--background-index', '--query-driver="C:\\Microsoft\\AndroidNDK64\\android-ndk-r21c\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang*"' },
+  capabilities = capabilities,
+  on_attach = on_attach,
+  flags = {
+    debounce_text_changes = 150,
+  },
+}
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
@@ -403,7 +409,7 @@ cmp.setup.cmdline(':', {
 local signs = { Error = ' ', Warning = ' ', Hint = ' ', Information = ' ' }
 cmd 'set signcolumn=yes'
 for type, icon in pairs(signs) do
-  -- local hl = "DiagnosticSign" .. type -- For 0.6.0
-  local hl = 'LspDiagnosticsSign' .. type -- For 0.5.1
+  local hl = 'DiagnosticSign' .. type -- For 0.6.0
+  -- local hl = 'LspDiagnosticsSign' .. type -- For 0.5.1
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
 end
