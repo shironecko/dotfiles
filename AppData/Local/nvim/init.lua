@@ -139,8 +139,22 @@ try_require('nightfox', function(mod)
   mod.load 'nightfox'
 end)
 
+-- WGSL support
+cmd [[au BufRead,BufNewFile *.wgsl set filetype=wgsl]]
+
+try_require('nvim-treesitter.parsers', function(mod)
+  local parser_config = mod.get_parser_configs()
+  parser_config.wgsl = {
+    install_info = {
+      url = 'https://github.com/szebniok/tree-sitter-wgsl',
+      files = { 'src/parser.c' },
+    },
+  }
+end)
+
 try_require('nvim-treesitter.configs', function(mod)
   mod.setup {
+    ensure_installed = { 'wgsl' },
     highlight = {
       enable = true,
     },
@@ -381,7 +395,11 @@ lspconfig['rust_analyzer'].setup {
 
 lspconfig['clangd'].setup {
   -- make NDK builds functional
-  cmd = { 'clangd', '--background-index', '--query-driver="C:\\Microsoft\\AndroidNDK64\\android-ndk-r21c\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang*"' },
+  cmd = {
+    'clangd',
+    '--background-index',
+    '--query-driver="C:\\Microsoft\\AndroidNDK64\\android-ndk-r21c\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang*"',
+  },
   capabilities = capabilities,
   on_attach = on_attach,
   flags = {
