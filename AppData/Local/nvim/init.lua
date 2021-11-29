@@ -58,6 +58,7 @@ require('packer').startup(function(use)
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
       'onsails/lspkind-nvim',
+      'simrat39/rust-tools.nvim',
     },
   }
 
@@ -75,7 +76,7 @@ local g = vim.g -- global 2?
 local wo = vim.wo -- window local
 local bo = vim.bo -- buffer local
 
-vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+vim.opt.completeopt = { 'menuone', 'noinsert', 'noselect' }
 vim.opt.shortmess:append 'c'
 vim.opt.termguicolors = true
 o.termguicolors = true
@@ -204,15 +205,20 @@ then
   return
 end
 
-require('lualine').setup {
-  options = {
-    theme = 'nightfox',
-  },
-  sections = {
-    lualine_b = { { 'diagnostics', sources = { 'nvim_lsp' } } },
-    lualine_c = { 'filename', require('lsp-status').status },
-  },
-}
+-- duplicate binds detection is more hassle than it's worth
+vimp.always_override = true
+
+try_require('lualine', function(mod)
+  mod.setup {
+    options = {
+      theme = 'nightfox',
+    },
+    sections = {
+      lualine_b = { { 'diagnostics', sources = { 'nvim_lsp' } } },
+      lualine_c = { 'filename', lsp_status.status },
+    },
+  }
+end)
 
 telescope.setup {
   defaults = {
@@ -301,7 +307,7 @@ cmp.setup {
   },
 }
 
-vimp.nnoremap('<leader>rf', function()
+vimp.nnoremap('<leader>rF', function()
   cmd 'Neoformat'
 end)
 
@@ -348,6 +354,11 @@ vimp.nnoremap('<leader>fr', telescope_builtin.resume)
 vimp.nnoremap('<leader>fR', telescope_builtin.registers)
 vimp.nnoremap('<leader>ft', telescope_builtin.treesitter)
 
+-- stop unintentional weird eddits when LSP is not attached
+vimp.nnoremap('<leader>rf', function()
+  print 'No LSP attached!'
+end)
+
 local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vimp.add_buffer_maps(bufnr, function()
@@ -374,9 +385,28 @@ local on_attach = function(client, bufnr)
     vimp.nnoremap('[d', vim.lsp.diagnostic.goto_prev)
     vimp.nnoremap(']d', vim.lsp.diagnostic.goto_next)
     vimp.nnoremap('<space>q', vim.lsp.diagnostic.set_loclist)
-    vimp.nnoremap('<space>rF', vim.lsp.buf.formatting)
+    vimp.nnoremap('<space>rf', vim.lsp.buf.formatting)
+  end)
+end
 
-    -- this one clangd shortcut
+local rust_on_attach = function(client, bufnr)
+  on_attach(client, bufnr)
+
+  vimp.add_buffer_maps(bufnr, function()
+    vimp.nnoremap('<space>bb', function()
+      cmd 'RustRunnables'
+    end)
+
+    vimp.nnoremap('<space>br', function()
+      cmd 'RustReloadWorkspace'
+    end)
+  end)
+end
+
+local clangd_on_attach = function(client, bufnr)
+  on_attach(client, bufnr)
+
+  vimp.add_buffer_maps(bufnr, function()
     vimp.nnoremap('<A-o>', function()
       cmd 'ClangdSwitchSourceHeader'
     end)
@@ -384,14 +414,41 @@ local on_attach = function(client, bufnr)
 end
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-local servers = { 'clangd', 'rust_analyzer' }
-lspconfig['rust_analyzer'].setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  flags = {
-    debounce_text_changes = 150,
-  },
-}
+
+try_require('rust-tools', function(mod)
+  mod.setup {
+    tools = { -- rust-tools options
+      autoSetHints = true,
+      hover_with_actions = true,
+      inlay_hints = {
+        show_parameter_hints = false,
+        parameter_hints_prefix = '',
+        other_hints_prefix = '',
+      },
+    },
+
+    -- all the opts to send to nvim-lspconfig
+    -- these override the defaults set by rust-tools.nvim
+    -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
+    server = {
+      capabilities = capabilities,
+      on_attach = rust_on_attach,
+      flags = {
+        debounce_text_changes = 150,
+      },
+      settings = {
+        -- to enable rust-analyzer settings visit:
+        -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+        ['rust-analyzer'] = {
+          -- enable clippy on save
+          checkOnSave = {
+            command = 'clippy',
+          },
+        },
+      },
+    },
+  }
+end)
 
 lspconfig['clangd'].setup {
   -- make NDK builds functional
@@ -401,7 +458,7 @@ lspconfig['clangd'].setup {
     '--query-driver="C:\\Microsoft\\AndroidNDK64\\android-ndk-r21c\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang*"',
   },
   capabilities = capabilities,
-  on_attach = on_attach,
+  on_attach = clangd_on_attach,
   flags = {
     debounce_text_changes = 150,
   },
