@@ -54,7 +54,7 @@ scoop install IBMPlexMono-NF
 [Environment]::SetEnvironmentVariable("NEOVIDE_MULTIGRID", "ON", "User")
 
 # global gitignore
-git config --global core.excludesfile $env:homepath\.gitignore
+git config --global core.excludesfile $env:userprofile\.gitignore
 
 # setup nvim plugins
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
