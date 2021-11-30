@@ -23,7 +23,7 @@ scoop bucket add nerd-fonts
 scoop bucket add jetbrains
 
 scoop install 7zip bat fd ripgrep fzf tokei touch lsd
-scoop install vscode sublime-text sublime-merge neovim
+scoop install vscode sublime-text sublime-merge neovim-nightly
 scoop install watchexec
 scoop install rustup rust-analyzer
 scoop install llvm
@@ -52,6 +52,9 @@ scoop install IBMPlexMono-NF
 [Environment]::SetEnvironmentVariable("FZF_DEFAULT_COMMAND", "fd --type f", "User")
 # enable fancy things in neovide
 [Environment]::SetEnvironmentVariable("NEOVIDE_MULTIGRID", "ON", "User")
+
+# global gitignore
+git config --global core.excludesfile $env:homepath\.gitignore
 
 # setup nvim plugins
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
