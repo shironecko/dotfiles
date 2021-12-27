@@ -1,1 +1,0 @@
-start /b autohotkey %homepath%\.config\autohotkey.ahk
