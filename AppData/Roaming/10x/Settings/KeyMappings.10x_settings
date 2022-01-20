@@ -1,0 +1,291 @@
+
+# Open a file
+Control O:                                        OpenFile
+
+# Close the current file
+Control F4:                                       CloseFile
+
+# Save the current file
+Control S:                                        SaveFile
+
+# Save all files
+Control S, Control S:                             SaveAll
+
+# Show the Find File panel
+Control P:                                      FindFile
+
+# Create a new text file
+Control N:                                        NewTextFile
+
+# Cut to Clipboard
+Control X:                                        Cut
+
+# Copy to clipboard
+Control C:                                        Copy
+
+# Paste from clipboard
+Control V:                                        Paste
+
+# Show the paste history dropdown
+Control Shift V:                                  PasteHistory
+
+# Find text in the current file
+Control F:                                        FindInFile
+
+# Find the previous occurance of the last searched for text in the current file
+Shift F3:                                         FindInFilePrev
+
+# Find the next occurance of the last searched for text in the current file
+F3:                                               FindInFileNext
+
+# Find the previous occurance of the current word in the current file
+Control Shift F3:                                 FindInFilePrevCurrentWord
+
+# Find the next occurance of the current word in the current file
+Control F3:                                       FindInFileNextCurrentWord
+
+# Find and replace text in the current file
+Control H:                                        FindReplaceInFile
+
+# Go to the specified line in the current file
+Control G:                                        GoToLine
+
+# Go to the previous cursor location
+Control Minus:                                    PrevLocation
+
+# Go to thenext cursor location
+Control Shift Minus:                              NextLocation
+
+# Select the next occurance of the current word using multi-cursor select
+Control D:                                        SelectNextMultiCursor
+
+# Undo the last operation
+Control Z:                                        Undo
+
+# Redo the last undone operation
+Control Y:                                        Redo
+
+# Make selection uppercase
+Control Shift U:                                  MakeSelectionUppercase
+
+# Make selection lowercase
+Control U:                                        MakeSelectionLowercase
+
+# Move current line up one
+Control Shift Up:                                 MoveLineUp
+
+# Move current line down one
+Control Shift Down:                               MoveLineDown
+
+# Cut the current line
+Shift Delete:                                     CutLine
+
+# Delete the current line
+Control Shift L:                                  DeleteLine
+
+# Show the current file in the workspace tree
+Control T:                                        ShowInWorkspaceTree
+
+# Add a new cursor on the line above
+Control Shift Alt Up:                             MultiCursorMoveUp
+
+# Add a new cursor on the line below
+Control Shift Alt Down:                           MultiCursorMoveDown
+
+# Increase selection end for all multi-cursors
+Control Shift Alt Left:                           MultiCursorMoveLeft
+
+# Decrease selection end for all multi-cursors
+Control Shift Alt Right:                          MultiCursorMoveRight
+
+# Toggle line comment if no select. Toggle block comment if selection.
+Control Shift /:                                  ToggleComment
+
+# Duplicate the current line
+Control Shift D:                                  DuplicateLine
+
+# Insert a new line at the current line
+Control Enter:                                    InsertLine
+
+# Select all text
+Control A:                                        SelectAll
+
+# Select the current word
+Control W:                                        SelectCurrentWord
+
+# Select the current scope
+Shift Alt Equals:                                 SelectCurrentScope
+
+# Select the current scope for ()[]{}
+Control Shift M:                                  SelectCurrentBracketScope
+
+# Toggle the workspace explorer panel
+Control Shift E:                                  ToggleWorkspaceExplorer
+
+# Move the current panel left
+Control Alt Left:                                 MovePanelLeft
+
+# Move the current panel right
+Control Alt Right:                                MovePanelRight
+
+# Move the current panel up
+Control Alt Up:                                   MovePanelUp
+
+# Move the current panel down
+Control Alt Down:                                 MovePanelDown
+
+# Move the current panel focus left
+Alt Left:                                         MovePanelFocusLeft
+
+# Move the current panel focus right
+Alt Right:                                        MovePanelFocusRight
+
+# Move the current panel focus up
+Alt Up:                                           MovePanelFocusUp
+
+# Move the current panel focus down
+Alt Down:                                         MovePanelFocusDown
+
+# Show the switch file panel
+Control Tab:                                      ShowSwitchPanelPanel
+
+# Move to the previous item in the switch file panel
+Control Shift Tab:                                ShowSwitchPanelPrevItem
+
+# Duplicate the current panel
+Shift Alt D:                                      DuplicatePanel
+
+# Duplicate the current panel and move to the left
+Alt Comma:                                        DuplicatePanelLeft
+
+# Duplicate the current panel and move to the right
+Alt Period:                                       DuplicatePanelRight
+
+# Focus the previous tab in the current panel
+Control PageUp:                                   PrevPanelTab
+
+# Focus the next tab in the current panel
+Control PageDown:                                 NextPanelTab
+
+# Toggle whitespace visibility
+Control Shift W:                                  ToggleWhitespace
+
+# Jump to the definition of the current symbol
+Alt G:                                            GotoSymbolDefinition
+
+# Find a symbol in the workspace
+Shift Alt S:                                      FindSymbol
+
+# Show references for the current symbol
+Shift Alt F:                                      FindSymbolReferences
+
+# Rename the current symbol
+Control R:                                        RenameSymbol
+
+# Open the Find Function panel to find a function defnition in the current file
+Alt M:                                            FindFunction
+
+# Show the autocomplete dropdown
+Control Space:                                    Autocomplete
+
+# If cursor is in a function call show the function declaration
+Control Shift Space:                              ShowFunctionArgsInfo
+
+# Build the currently active workspace
+F7:                                               BuildActiveWorkspace
+
+# Rebuild the currently active workspace
+Control Alt F7:                                   RebuildActiveWorkspace
+
+# Build the current file
+Control F7:                                       BuildCurrentFile
+
+# Go to the previous build error
+Shift F8:                                         GotoPrevBuildError
+
+# Go to the next build error
+F8:                                               GotoNextBuildError
+
+# Cancel the current build
+Control Cancel:                                   CancelBuild
+
+# Start debugging
+F5:                                               StartDebugging
+
+# Launch the exe without debugging
+Control F5:                                       Run
+
+# Toggle breakpoint on the current line
+F9:                                               ToggleBreakpoint
+
+# Remove all breakpoints from the current file
+Control Shift F9:                                 RemoveAllBreakpointsFromFile
+
+# Start/stop recording a key sequence
+Control Shift R:                                  RecordKeySequence
+
+# Playback a key sequence
+Control Shift P:                                  PlaybackKeySequence
+
+# Show the execute command text box
+Control Shift X:                                  ExecuteCommand
+
+# Toggle bookmark for current line
+Control F2:                                       ToggleBookmark
+
+# Go to the previous bookmark
+Shift F2:                                         PrevBookmark
+
+# Go to the next bookmark
+F2:                                               NextBookmark
+
+# Go to the previous bookmark in the current file
+Shift Alt F2:                                     PrevBookmarkInFile
+
+# Go to the next bookmark in the current file
+Alt F2:                                           NextBookmarkInFile
+
+# Remove all bookmarks from the current file
+Control Shift F2:                                 RemoveAllBookmarksFromFile
+
+# Go to the previus result in the last search or build operation
+Shift F4:                                         GotoPrevResult
+
+# Go to the next result in the last search or build operation
+F4:                                               GotoNextResult
+
+# Re-open the most recently closed file
+Control Shift T:                                  RestoreRecentlyClosedFile
+
+# Format the selection or the current scope if no selection
+Control K, Control F:                             FormatSelection
+
+# Example showing how to bind a python function to a key
+Alt H:                                            HelloWorld()
+
+# Save all files
+Control Shift S:                                  SaveAll
+
+# Copy to clipboard
+Control Insert:                                   Copy
+
+# Paste from clipboard
+Shift Insert:                                     Paste
+
+# Redo the last undone operation
+Control Shift Z:                                  Redo
+
+# Go to the previous cursor location
+MouseBackButton:                                  PrevLocation
+
+# Go to thenext cursor location
+MouseForwardButton:                               NextLocation
+
+# Toggle between the source .cpp and .h header file
+Alt O:                                            CppParser.ToggleSourceHeader
+
+# Show the FindInFiles panel
+Control Shift F:                                  FindInFiles
+
+# Show the ReplaceInFiles panel
+Control Shift H:                                  ReplaceInFiles
