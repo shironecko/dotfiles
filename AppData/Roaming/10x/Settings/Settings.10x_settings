@@ -1,0 +1,247 @@
+
+# The main UI font for 10X. Use the name of the .ttf file in c:\windows\fonts\ (without the extension)
+UI.Font:                                          LiberationSans-Regular
+
+# The main UI font size for 10X. It's usually better to change the UI.Scale which also scales the font size.
+UI.Font Size:                                     9
+
+# Use 'Horizontal' for standard sub-pixel rendering, 'None' to disable.
+# Use VerticalLeft if you have your monitor orientated vertically on its
+# left side, and VerticalRight if orientated on the right side.
+# Valid values: None, Horizontal, VerticalLeft, VerticalRight
+UI.SubPixel Font Rendering:                       Horizontal
+
+# Gamma value for font rendering
+UI.Font Gamma:                                    1.8
+
+# The main UI Scale. Set to 1 for 100% scaling, 1.5 for 150% etc. Set to 'auto' to use the OS scale.
+# Valid values: float, auto
+UI.Scale:                                         auto
+
+# The font for all text editor windows. Use the name of the .ttf file in c:\windows\fonts\ (without the extension)
+Editor.Font:                                      Blex Mono Nerd Font Complete Windows Compatible
+
+# The font size for all text editor windows
+Editor.Font Size:                                 11.5
+
+# Hide the main menu when not in use. Mouse Over to make visible.
+UI.HideMenu:                                      false
+
+# The current colour scheme for all UI elements. Can be 'default'
+UI.Colour Scheme:                                 VS+VAX custom
+
+# How often to backup unsaved files (ms)
+Editor.Backup Frequency:                          5000
+
+# Default scripts that 10x has installed to the appdata\10x\PythonScripts path
+Python.Installed Scripts:                         ClangFormat.py,Example.py,FormatFile.py,KeyMappingExample.py,Snippets.py
+
+# Whether the tab key inserts a tab char or n spaces.
+# Valid values: Tabs, Spaces
+Editor.Tab Mode:                                  Tabs
+
+# Width of a tab in chars
+Editor.Tab Width:                                 4
+
+# Path of the Visual Studio VsDevCmd.bat or vcvars64.bat batch file to use for setting the Visual Studio build environment. Restart 10X after changing this value. Set to 'auto' to let 10x try and find the path
+Build.VisualStudioEnvBat:                         C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/Tools/VsDevCmd.bat
+
+# Enable VSync
+UI.VSync:                                         true
+
+# Scroll bar mode for code text editor panels
+# Valid values: Standard, Map
+UI.ScrollBarMode:                                 Map
+
+# Crash dump mode. Restart 10x for this to take effect
+# Valid values: Mini, MiniWithHeap, Full
+Misc.CrashDumpMode:                               MiniWithHeap
+
+# Number of lines scroll wheel scrolls
+UI.MouseWheelScrollStep:                          3
+
+# Control+click in text editor to go to definition of symbol. Otherwise just selects word.
+UI.ControlClickGotoDefinition:                    true
+
+# Setting to true sleeps the app when idle instead of calling Present. The app is considered idle when nothing on screen changes and there is no user input. Calling nothing but present still uses a small <1% of CPU time, setting this will get it to 0%. However, this can cause issues with G-Sync. A better solution to the G-Sync problem is to turn off G-Sync for 10x in the NVIDIA display settings.
+UI.DisablePresentWhenIdle:                        true
+
+# Sends data to PureDev Software, such as time used per day and crashes per day. The data is anonymous. Restart 10x for this setting to take effect.
+EnableTelemetry:                                  true
+
+# File wildcards for files that should automatically open in column 0. Separated by commas.
+UI.Column0Files:                                  *.c,*.cc,*.cpp,*.c++,*.cp,*.cxx
+
+# File wildcards for files that should automatically open in column 1. Separated by commas.
+UI.Column1Files:                                  *.h,*.hh,*.hpp,*.h++,*.hp,*.hxx,*.inl
+
+# File wildcards for files that should automatically open in column 2. Separated by commas.
+UI.Column2Files:                                  *.bat,*.py
+
+# Show line numbers (true,false)
+Editor.Line Numbers:                              true
+
+# Margin width
+Editor.Margin Width:                              16
+
+# Delay before the drag-drop dock target panel appears (in ms)
+UI.DragDropDockDelay:                             300
+
+# Update the line indents after a paste
+Editor.UpdateIndentsOnPaste:                      true
+
+# Auto-indent new lines
+Editor.AutoIndent:                                true
+
+# Highlight all instances of the current symbol
+Editor.HighlightCurrentSymbol:                    true
+
+# Highlight all instances of the current word
+Editor.HighlightCurrentWord:                      false
+
+# Highlight all instances of the currently selected word
+Editor.HighlightSelectedWord:                     true
+
+# Ctrl+tab switch file mode. Can be set to all files or restricted to files open in the current panel
+# Valid values: All, Panel
+UI.SwitchFileMode:                                All
+
+# true to make Toggle Comment command use // line comments instead of /* */
+UI.CommentBlockUsesLineComments:                  false
+
+# true to make the Comment command move to the next line on single line comments
+UI.CommentBlockIncrementLine:                     false
+
+# When creating a new line add tabs or spaces to the current indentation depth
+Editor.ExtendEmptyLines:                          false
+
+# The width of the map scroll bar
+UI.MapScrollBarWidth:                             60
+
+# Typing an open bracket/brace char ((,{,[) with selected text will enclose the selection with that bracket/brace 
+UI.BracketSelection:                              true
+
+# Open the last workspace opened when starting 10x
+OpenLastWorkspaceOnStartup:                       false
+
+# The maximum number of cores to use, -1 to use SystemCoreCount*0.8 (requires restart)
+MaxCoreCount:                                     -1
+
+# When auto completing a function add the ( bracket and the ) bracket if it has no args
+AutoAddFunctionBrackets:                          true
+
+# Hide items with a low match score behind the 'more...' item
+AutoCompleteHideLowMatch:                         true
+
+# Show whitespace
+Editor.ShowWhitespace:                            true
+
+# Show indent lines
+Editor.IndentLines:                               true
+
+# Enable verbose logging to the .log file
+VerboseLogging:                                   false
+
+# Sync breakpoints and current config with Visual Studio
+VisualStudioSync:                                 true
+
+# Allow submitting of first item in list with tab even if no item is selected
+SubmitFirstAutocomplete:                          true
+
+# If enabled, left/right cursor keys move between text boxes and buttons in the find and find/replace panels
+FindPanelCursorKeys:                              true
+
+# Close the find panel when the Enterkey is pressed
+CloseFindPanelOnEnter:                            false
+
+# Vertical mouse wheel sensitivity
+VerticalMouseWheelSensitivity:                    1
+
+# Horizontal mouse wheel sensitivity
+HorizontalMouseWheelSensitivity:                  1
+
+# Reopen a file in the current panel even if it already open in a different panel
+UI.ReopenFileInCurrentPanel:                      false
+
+# Build before starting debugging using the StartDebugging command (F5)
+BuildBeforeStartDebugging:                        true
+
+# Lets 10x use as much memory as it likes
+UnlimitedMemory:                                  false
+
+# Path mode for the Search panel results
+# Valid values: Full, Relative, Filename, FolderAndFile
+Search.PathMode:                                  Filename
+
+# Search will search files with these extensions
+Search.Extensions:                                .asm, .bat, .c, .cc, .cpp, .cs, .css, .csv, .cxx, .def, .disco, .dtd, .fx, .h, .hh, .hpp, .hlsl, .htm, .html, .hxx, .idl, .inc, .inl, .java, .js, .l, .ll, .lnx, .log, .mk, .pl, .pmk, .ps, .py, .s, .sh, .src, .srf, .tlh, .tli, .txt, .vb, .vsh, .wsdl, .xaml, .xml, .xsd, .xsl, .xslt, .y, .psh, .fsh, .sh, .shader, .vsct, .resx, .wxs, .php, .vsixmanifest, .uc, .sql, .webconfig, .aspx, .lua, .cshtml, .md, .usf, .ush
+
+# Comma separated list of wildcards for files to exclude
+Search.ExcludeList:                               
+
+# The maximum file size that Search will index
+Search.MaxFileSize:                               1048576
+
+# Use the current word as the initial search text when opening the Search panel
+Search.SearchCurrentWord:                         true
+
+# Search will stop searching after this many results have been found
+Search.MaxResults:                                1000
+
+# Sort the file results by how often they have been opened
+Search.SortOpenFilesByOpenFrequency:              true
+
+# Update the current block indentation when a close brace is typed
+Parser.UpdateIndentsOnCloseBrace:                 true
+
+# Automatically fix . and -> depending if the variable is a pointer
+Parser.AutoFixIndirection:                        true
+
+# Automatically add a close brace after typing an open brace
+Editor.AutoAddCloseBrace:                         false
+
+# Automatically add a close brace and format the braces
+Editor.AutoAddCloseBraceAndFormat:                false
+
+# Automatically add a close bracket after typing an open bracket
+Editor.AutoAddCloseBracket:                       false
+
+# Automatically format statement or block when typing a ; or }
+Parser.AutoFormat:                                true
+
+# Dismiss the autocomplete when the typed text matches one of these comma separated strings
+Parser.ExactMatchAutoComplete:                    else,endif
+
+# true to indent case statements inside switch case block
+Parser.IndentCaseStatements:                      true
+
+# Comma separated list of paths to exclude (supports wildcards). Clear out cache for it to take effect.
+Parser.ExcludeFilters:                            
+
+# When autcompleting functions submit the autocomplete by typing (
+Parser.SubmitAutocompleteOnOpenBracket:           true
+
+# If true, goto definition on function calls will go to the function implementation instead of the declaration
+Parser.GotoFunctionImplementation:                true
+
+# When pressing Enter between {} braces move the braces to new lines
+Parser.FormatBracesOnEnterSplit:                  false
+
+# Typing /** will add a */, Enter will add a new line starting with *
+Parser.AutoFormatBlockComments:                   true
+
+# If true the open brace will be moved to the next line on auto-foramt
+Parser.OpenBraceOnNewLine:                        false
+
+# true to enable autocomplete to automatically show as you type
+Parser.Autocomplete:                              true
+
+# Comma separated list of paths. The parser will parse all files found in these directories.
+# End with * to add files recursively. Reopen workspace for this setting to take effect
+Parser.AdditionalIncludePaths:                    
+
+# if true, '#if SOMETHING' will resolve to '#if 1' if SOMETHING isn't defined. Reopen the workspace and reparse for this to take effect.
+Parser.TreatUndefinedDefinesAsTrue:               false
+
+# Verbose logging level. 0: disabled. 1: displays parse times for files. 2: full verbose
+Parser.VerboseLogging:                            0
